@@ -43,6 +43,7 @@ class Img:
                 average = sum(sum(sub_row) for sub_row in sub_matrix) // filter_sum
                 row_result.append(average)
             result.append(row_result)
+
         self.data = result
 
     def contour(self):
