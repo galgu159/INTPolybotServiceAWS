@@ -37,9 +37,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Checkout the repo code
-        uses: actions/checkout@v2
-
       - name: Set up SSH key
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
@@ -56,4 +53,7 @@ jobs:
               sudo docker stop polybot || true
               sudo docker rm polybot || true
               sudo docker run -d --restart always --name polybot -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest
+            EOF
+          done
+
 
