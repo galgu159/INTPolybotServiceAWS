@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo code
@@ -21,9 +21,9 @@ jobs:
           echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/yolo5:latest
 
-  Deploy:
+  deploy:
     runs-on: ubuntu-latest
-    needs: Build
+    needs: build
     steps:
       - name: Update Launch Template and Refresh ASG
         run: |
