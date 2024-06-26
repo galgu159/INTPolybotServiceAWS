@@ -50,7 +50,7 @@ jobs:
               sudo docker stop polybot || true
               sudo docker rm polybot || true
               sudo docker run -d --restart always --name polybot -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest
-            EOF
+        EOF
           done
       env:
         AWS_REGION: ${{ secrets.AWS_REGION }}
