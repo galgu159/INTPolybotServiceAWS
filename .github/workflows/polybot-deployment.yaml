@@ -49,7 +49,8 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest
             sudo docker stop polybot_container || true
             sudo docker rm polybot_container || true
-            sudo docker run -d --restart always --name polybot_container -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest          EOF
+            sudo docker run -d --restart always --name polybot_container -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest          
+        EOF
         done
       env:
         AWS_REGION: ${{ secrets.AWS_REGION }}
