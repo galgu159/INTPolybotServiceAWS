@@ -37,8 +37,8 @@ jobs:
 
     - name: Set up SSH key
       run: |
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
-        chmod 600 private_key.pem
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > galgu-Paris-Key.pem
+        chmod 600 galgu-Paris-Key.pem
 
     - name: Deploy to AWS EC2
       run: |         
@@ -68,10 +68,10 @@ jobs:
 
           echo "Instance ID: $instance, Public IP: $PUBLIC_IP"
 
-          ssh -o StrictHostKeyChecking=no -i "private_key".pem ubuntu@$PUBLIC_IP "sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest"
-          ssh -o StrictHostKeyChecking=no -i "private_key".pem ubuntu@$PUBLIC_IP "sudo docker stop polybot || true"
-          ssh -o StrictHostKeyChecking=no -i "private_key".pem ubuntu@$PUBLIC_IP "sudo docker rm polybot || true"
-          ssh -o StrictHostKeyChecking=no -i "private_key".pem ubuntu@$PUBLIC_IP "sudo docker run -d --restart always --name polybot -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest"
+          ssh -o StrictHostKeyChecking=no -i "galgu-Paris-Key.pem".pem ubuntu@$PUBLIC_IP "sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest"
+          ssh -o StrictHostKeyChecking=no -i "galgu-Paris-Key.pem".pem ubuntu@$PUBLIC_IP "sudo docker stop polybot || true"
+          ssh -o StrictHostKeyChecking=no -i "galgu-Paris-Key.pem".pem ubuntu@$PUBLIC_IP "sudo docker rm polybot || true"
+          ssh -o StrictHostKeyChecking=no -i "galgu-Paris-Key.pem".pem ubuntu@$PUBLIC_IP "sudo docker run -d --restart always --name polybot -p 8443:8443 ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest"
         done
       env:
         AWS_REGION: ${{ secrets.AWS_REGION }}
