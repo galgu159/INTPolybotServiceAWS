@@ -33,7 +33,6 @@ jobs:
       run: |
         cd polybot
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest .
-        echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest
 
     - name: Set up SSH
