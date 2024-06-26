@@ -35,10 +35,10 @@ jobs:
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/polybot:latest
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Set up SSH key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
 
     - name: Deploy to AWS EC2
       run: |         
